@@ -23,15 +23,15 @@ WHERE COALESCE(TRIM(topic), '') <> '';
 INSERT INTO posts (id, user_id, topic_id, title, url, text_content)
 SELECT bp.id, u.id, t.id, bp.title, bp.url, bp.text_content
 FROM bad_posts bp
-    LEFT JOIN users u ON bp.username = u.username
-    LEFT JOIN topics t ON bp.topic = t.name;
+         LEFT JOIN users u ON bp.username = u.username
+         LEFT JOIN topics t ON bp.topic = t.name;
 
 -- Comments
 INSERT INTO comments (id, user_id, post_id, text_content)
 SELECT bc.id, u.id, p.id, bc.text_content
 FROM bad_comments bc
-    LEFT JOIN users u ON bc.username = u.username
-    LEFT JOIN posts p ON bc.post_id = p.id;
+         LEFT JOIN users u ON bc.username = u.username
+         LEFT JOIN posts p ON bc.post_id = p.id;
 
 -- Votes
 INSERT INTO votes (user_id, post_id, vote_value)

@@ -47,7 +47,6 @@ CREATE TABLE comments
     created_at        TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "nonempty_comment_text_content" CHECK ( COALESCE(TRIM(text_content), '') <> '' )
-
 );
 
 -- Votes Table
