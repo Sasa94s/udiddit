@@ -1,8 +1,24 @@
 # Udiddit, a social news aggregator
 
-## Introduction
-
 Udiddit, a social news aggregation, web content rating, and discussion website, is currently using a risky and unreliable Postgres database schema to store the forum posts, discussions, and votes made by their users about different topics.  
+
+## Prerequisites
+- Install PostgreSQL (Recommended v14)
+- Download [Dataset](https://video.udacity-data.com/topher/2020/February/5e548a9f_bad-db/bad-db.sql) into `data/` path.
+
+## Getting Started
+
+To setup the database schema and initial data, you need to follow these steps:
+- Create database named `udiddit`
+- From `data` directory, run `bad-db.sql`
+- From `scripts` directory, run `create.sql` then `migrate.sql`
+
+Or you can directly run the automation setup script from terminal:
+```shell
+. ./setup.sh
+```
+
+## Introduction
 
 The schema allows posts to be created by registered users on certain topics, and can include a URL or a text content. It also allows registered users to cast an upvote (like) or downvote (dislike) for any forum post that has been created. In addition to this, the schema also allows registered users to add comments on posts.  
 
