@@ -2,3 +2,4 @@
 data/
 draft.sql
 ~$*.docx
+.DS_Store

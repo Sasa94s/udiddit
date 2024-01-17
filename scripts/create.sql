@@ -15,7 +15,9 @@ CREATE TABLE topics
     id          SERIAL PRIMARY KEY,
     name        VARCHAR(30) UNIQUE NOT NULL,
     description VARCHAR(500) DEFAULT NULL,
-    created_at  TIMESTAMP    DEFAULT CURRENT_TIMESTAMP
+    created_at  TIMESTAMP    DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT "nonempty_topic_name" CHECK ( COALESCE(TRIM(name), '') <> '' )
 );
 
 -- Posts Table
@@ -29,6 +31,7 @@ CREATE TABLE posts
     text_content TEXT          DEFAULT NULL,
     created_at   TIMESTAMP     DEFAULT CURRENT_TIMESTAMP,
 
+    CONSTRAINT "nonempty_post_title" CHECK ( COALESCE(TRIM(title), '') <> '' ),
     CONSTRAINT "text_or_url_only" CHECK ( (url IS NOT NULL OR text_content IS NOT NULL) AND
                                           (url IS NULL OR text_content IS NULL))
 );
@@ -41,7 +44,10 @@ CREATE TABLE comments
     post_id           INT REFERENCES posts (id) ON DELETE CASCADE,
     parent_comment_id INT REFERENCES comments (id) ON DELETE CASCADE,
     text_content      TEXT NOT NULL,
-    created_at        TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    created_at        TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT "nonempty_comment_text_content" CHECK ( COALESCE(TRIM(text_content), '') <> '' )
+
 );
 
 -- Votes Table
